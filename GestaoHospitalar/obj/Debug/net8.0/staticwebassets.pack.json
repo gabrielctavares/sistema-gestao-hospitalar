@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\GestaoHospitalar.bundle.scp.css",
+      "PackagePath": "staticwebassets\\GestaoHospitalar.bundle.scp.css"
+    },
+    {
+      "Id": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\wwwroot\\app.css",
+      "PackagePath": "staticwebassets\\app.css"
+    },
+    {
+      "Id": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\wwwroot\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\wwwroot\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.GestaoHospitalar.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.GestaoHospitalar.props",
+      "PackagePath": "build\\GestaoHospitalar.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.GestaoHospitalar.props",
+      "PackagePath": "buildMultiTargeting\\GestaoHospitalar.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.GestaoHospitalar.props",
+      "PackagePath": "buildTransitive\\GestaoHospitalar.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

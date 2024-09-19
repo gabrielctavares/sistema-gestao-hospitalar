@@ -1,0 +1,194 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "G:\\Projetos\\GestaoHospitalar\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\layout\\navmenu.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\pages\\weather.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\pages\\weather.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\pages\\home.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\pages\\error.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\layout\\mainlayout.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\routes.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\app.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\components\\_imports.razor||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|g:\\projetos\\gestaohospitalar\\gestaohospitalar\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B06C9537-3FBC-4EDF-BB5C-0D6C768E9307}|GestaoHospitalar\\GestaoHospitalar.csproj|solutionrelative:gestaohospitalar\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Weather.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Pages\\Weather.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\Pages\\Weather.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Pages\\Weather.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\Pages\\Weather.razor",
+              "ViewState": "AQIAAAkAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:35:01.142Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Home.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Pages\\Home.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\Pages\\Home.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Pages\\Home.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\Pages\\Home.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:31:32.952Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Error.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Pages\\Error.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\Pages\\Error.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Pages\\Error.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\Pages\\Error.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:31:06.933Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "NavMenu.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Layout\\NavMenu.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\Layout\\NavMenu.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Layout\\NavMenu.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\Layout\\NavMenu.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:31:00.078Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MainLayout.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Layout\\MainLayout.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\Layout\\MainLayout.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Layout\\MainLayout.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\Layout\\MainLayout.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:30:52.075Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Routes.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Routes.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\Routes.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\Routes.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\Routes.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:30:39.661Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "App.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\App.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\App.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\App.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\App.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:30:25.211Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Imports.razor",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\_Imports.razor",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Components\\_Imports.razor",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Components\\_Imports.razor",
+              "RelativeToolTip": "GestaoHospitalar\\Components\\_Imports.razor",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-19T00:30:22.716Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\appsettings.json",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\appsettings.json",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\appsettings.json",
+              "RelativeToolTip": "GestaoHospitalar\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAADAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-09-19T00:21:54.408Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Program.cs",
+              "RelativeDocumentMoniker": "GestaoHospitalar\\Program.cs",
+              "ToolTip": "G:\\Projetos\\GestaoHospitalar\\GestaoHospitalar\\Program.cs",
+              "RelativeToolTip": "GestaoHospitalar\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABsAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-19T00:20:28.372Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
