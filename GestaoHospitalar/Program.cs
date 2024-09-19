@@ -3,8 +3,16 @@ using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+var fullConnectionString = $"{connectionString}User ID={dbUser};Password={dbPassword};";
+
+
 builder.Services.AddTransient(x =>
-  new MySqlConnection(builder.Configuration.GetConnectionString("Default")));
+  new MySqlConnection(fullConnectionString));
 
 
 // Add services to the container.

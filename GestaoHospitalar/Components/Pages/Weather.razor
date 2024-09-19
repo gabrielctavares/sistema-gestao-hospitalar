@@ -1,4 +1,5 @@
 ﻿@page "/weather"
+@using MySqlConnector
 @attribute [StreamRendering]
 
 <PageTitle>Weather</PageTitle>
@@ -37,7 +38,14 @@ else
 }
 
 @code {
+    [Inject] public MySqlConnection Connection { get; set; }
+
     private WeatherForecast[]? forecasts;
+
+    public Weather(MySqlConnection connection)
+    {
+        Connection = connection;
+    }
 
     protected override async Task OnInitializedAsync()
     {

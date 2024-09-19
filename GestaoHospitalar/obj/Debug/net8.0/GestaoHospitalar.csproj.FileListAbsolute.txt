@@ -31,3 +31,4 @@ G:\Projetos\GestaoHospitalar\GestaoHospitalar\obj\Debug\net8.0\refint\GestaoHosp
 G:\Projetos\GestaoHospitalar\GestaoHospitalar\obj\Debug\net8.0\GestaoHospitalar.pdb
 G:\Projetos\GestaoHospitalar\GestaoHospitalar\obj\Debug\net8.0\GestaoHospitalar.genruntimeconfig.cache
 G:\Projetos\GestaoHospitalar\GestaoHospitalar\obj\Debug\net8.0\ref\GestaoHospitalar.dll
+G:\Projetos\GestaoHospitalar\GestaoHospitalar\obj\Debug\net8.0\GestaoHospitalar.sourcelink.json
