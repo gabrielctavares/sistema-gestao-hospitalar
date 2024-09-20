@@ -8,6 +8,11 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 var dbUser = Environment.GetEnvironmentVariable("DB_USER");
 var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
+if (string.IsNullOrEmpty(dbUser) || string.IsNullOrEmpty(dbPassword))
+{
+    throw new InvalidOperationException("Database credentials are not set in the environment variables.");
+}
+
 var fullConnectionString = $"{connectionString}User ID={dbUser};Password={dbPassword};";
 
 

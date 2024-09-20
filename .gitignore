@@ -328,7 +328,7 @@ $RECYCLE.BIN/
 ### VisualStudio ###
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
-
+.vs/
 # User-specific files
 *.rsuser
 
