@@ -1,46 +1,48 @@
 ﻿@page "/internacoes/delete"
 @inject NavigationManager NavigationManager
+@inject IInternacaoService InternacaoService
+@inject ISnackbar Snackbar
 
-<PageTitle>Delete</PageTitle>
+<PageTitle>Deletar</PageTitle>
 
-<h1>Delete</h1>
+<h1>Deletar</h1>
 
-<p>Are you sure you want to delete this?</p>
+<p>Tem certeza que deseja deletar isso?</p>
 <div>
-    <h2>Internacao</h2>
+    <h2>Internação</h2>
     <hr />
     @if (internacao is null)
     {
-        <p><em>Loading...</em></p>
+        <p><em>Carregando...</em></p>
     }
     else {
         <dl class="row">
-            <dt class="col-sm-2">IdPaciente</dt>
-            <dd class="col-sm-10">@internacao.IdPaciente</dd>
+            <dt class="col-sm-2">Paciente</dt>
+            <dd class="col-sm-10">(@internacao.IdPaciente) - @internacao.NomePaciente</dd>
         </dl>
         <dl class="row">
-            <dt class="col-sm-2">IdQuarto</dt>
+            <dt class="col-sm-2">Quarto</dt>
             <dd class="col-sm-10">@internacao.IdQuarto</dd>
         </dl>
         <dl class="row">
-            <dt class="col-sm-2">DataEntrada</dt>
+            <dt class="col-sm-2">Data de Entrada</dt>
             <dd class="col-sm-10">@internacao.DataEntrada</dd>
         </dl>
         <dl class="row">
-            <dt class="col-sm-2">DataSaida</dt>
+            <dt class="col-sm-2">Data de Saida</dt>
             <dd class="col-sm-10">@internacao.DataSaida</dd>
         </dl>
         <dl class="row">
-            <dt class="col-sm-2">IdResponsavel</dt>
-            <dd class="col-sm-10">@internacao.IdResponsavel</dd>
+            <dt class="col-sm-2">Responsável</dt>
+            <dd class="col-sm-10">(@internacao.IdResponsavel) - @internacao.NomeResponsavel</dd>
         </dl>
         <dl class="row">
             <dt class="col-sm-2">Tratamento</dt>
             <dd class="col-sm-10">@internacao.Tratamento</dd>
         </dl>
         <EditForm method="post" Model="internacao" OnValidSubmit="DeleteInternacao" FormName="delete" Enhance>
-            <button type="submit" class="btn btn-danger" disabled="@(internacao is null)">Delete</button> |
-            <a href="/internacaos">Back to List</a>
+            <button type="submit" class="btn btn-danger" disabled="@(internacao is null)">Deletar</button> |
+            <a href="/internacaos">Voltar</a>
         </EditForm>
     }
 </div>
@@ -53,8 +55,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //internacao = await context.Internacao.FirstOrDefaultAsync(m => m.IdInternacao == IdInternacao);
+        internacao = await InternacaoService.GetInternacaoByIdAsync(IdInternacao);
 
         if (internacao is null)
         {
@@ -64,9 +65,15 @@
 
     private async Task DeleteInternacao()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //context.Internacao.Remove(internacao!);
-        //await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/internacaos");
+        try
+        {
+            await InternacaoService.DeleteInternacaoAsync(internacao!.IdInternacao);
+            NavigationManager.NavigateTo("/internacoes");
+        }
+        catch (Exception e)
+        {
+
+            Snackbar.Add("Erro ao deletar internação." + e.Message, Severity.Error);
+        }
     }
 }

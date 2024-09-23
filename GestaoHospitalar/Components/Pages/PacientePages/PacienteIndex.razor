@@ -41,7 +41,7 @@
                 <MudTd DataLabel="Ações">
                     <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="() => NavigateToEdit(context.Cpf)" />
                     <MudIconButton Icon="@Icons.Material.Filled.Info" Color="Color.Secondary" OnClick="() => NavigateToDetails(context.Cpf)" />
-                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => NavigateToDetails(context.Cpf)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => NavigateToDelete(context.Cpf)" />
                 </MudTd>
             </RowTemplate>
             <PagerContent>
@@ -87,15 +87,15 @@
 
     private void NavigateToEdit(string cpf)
     {
-        NavigationManager.NavigateTo($"/pacientes/edit?CPF={cpf}");
+        NavigationManager.NavigateTo($"/pacientes/edit?cpf={cpf}");
     }
 
     private void NavigateToDetails(string cpf)
     {
-        NavigationManager.NavigateTo($"/pacientes/details?CPF={cpf}");
+        NavigationManager.NavigateTo($"/pacientes/details?cpf={cpf}");
     }
     private void NavigateToDelete(string cpf)
     {
-        NavigationManager.NavigateTo($"/pacientes/cancel?CPF={cpf}");
+        NavigationManager.NavigateTo($"/pacientes/delete?cpf={cpf}");
     }
 }

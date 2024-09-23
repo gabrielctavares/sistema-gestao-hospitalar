@@ -1,15 +1,17 @@
 ﻿@page "/medicos/edit"
 @inject NavigationManager NavigationManager
+@inject IMedicoService MedicoService
+@inject ISnackbar Snackbar
 
-<PageTitle>Edit</PageTitle>
+<PageTitle>Editar</PageTitle>
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h2>Medico</h2>
+<h2>Médico</h2>
 <hr />
 @if (Medico is null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Carregando...</em></p>
 }
 else
 {
@@ -20,7 +22,32 @@ else
                 <ValidationSummary />
                 <input type="hidden" name="Medico.IdFuncionario" value="@Medico.IdFuncionario" />
                 <div class="mb-3">
-                    <label for="crm" class="form-label">Crm:</label>
+                    <label for="Cpf" class="form-label">CPF:</label>
+                    <InputText id="cCpfrm" @bind-Value="Medico.Cpf" class="form-control" />
+                    <ValidationMessage For="() => Medico.Cpf" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="Nome" class="form-label">Nome:</label>
+                    <InputText id="Nome" @bind-Value="Medico.Nome" class="form-control" />
+                    <ValidationMessage For="() => Medico.Nome" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="Endereco" class="form-label">Endereço:</label>
+                    <InputText id="Endereco" @bind-Value="Medico.Endereco" class="form-control" />
+                    <ValidationMessage For="() => Medico.Endereco" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="Telefone" class="form-label">Telefone:</label>
+                    <InputText id="Telefone" @bind-Value="Medico.Telefone" class="form-control" />
+                    <ValidationMessage For="() => Medico.Telefone" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="Email" class="form-label">Email:</label>
+                    <InputText id="Email" @bind-Value="Medico.Email" class="form-control" />
+                    <ValidationMessage For="() => Medico.Email" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="crm" class="form-label">CRM:</label>
                     <InputText id="crm" @bind-Value="Medico.Crm" class="form-control" />
                     <ValidationMessage For="() => Medico.Crm" class="text-danger" />
                 </div>
@@ -29,14 +56,14 @@ else
                     <InputText id="especialidade" @bind-Value="Medico.Especialidade" class="form-control" />
                     <ValidationMessage For="() => Medico.Especialidade" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </EditForm>
         </div>
     </div>
 }
 
 <div>
-    <a href="/medicos">Back to List</a>
+    <a href="/medicos">Voltar</a>
 </div>
 
 @code {
@@ -48,45 +75,26 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //Medico ??= await context.Medico.FirstOrDefaultAsync(m => m.IdFuncionario == IdFuncionario);
+        Medico = await MedicoService.GetMedicoByIdFuncionarioAsync(IdFuncionario);
 
         if (Medico is null)
         {
             NavigationManager.NavigateTo("notfound");
         }
     }
-
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateMedico()
     {
-        /*
-        using var context = DbFactory.CreateDbContext();
-        context.Attach(Medico!).State = EntityState.Modified;
-
-            try
+        try
         {
-        await context.SaveChangesAsync();
+            await MedicoService.UpdateMedicoAsync(Medico!);
+            NavigationManager.NavigateTo("/medicos");
         }
-        catch (DbUpdateConcurrencyException)
-            {
-            if (!MedicoExists(Medico!.IdFuncionario))
-                {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-                {
-            throw;
-        }
-        }
-        */
-        NavigationManager.NavigateTo("/medicos");
-    }
+        catch (Exception e)
+        {
 
-    private bool MedicoExists(int idfuncionario)
-    {
-        //using var context = DbFactory.CreateDbContext();
-        return false; // context.Medico.Any(e => e.IdFuncionario == idfuncionario);
+            Snackbar.Add("Erro ao editar médicos." + e.Message, Severity.Error);
+
+        }
+
     }
 }

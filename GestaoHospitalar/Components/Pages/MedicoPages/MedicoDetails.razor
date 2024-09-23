@@ -1,27 +1,34 @@
 ﻿@page "/medicos/details"
 @inject NavigationManager NavigationManager
+@inject IMedicoService MedicoService
 
-<PageTitle>Details</PageTitle>
+<PageTitle>Detalhes</PageTitle>
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h2>Medico</h2>
+    <h2>Médico</h2>
     <hr />
     @if (medico is null)
     {
-        <p><em>Loading...</em></p>
+        <p><em>Carregando...</em></p>
     }
     else {
         <dl class="row">
-            <dt class="col-sm-2">Crm</dt>
+            <dt class="col-sm-2">Nome</dt>
+            <dd class="col-sm-10">@medico.Nome</dd>
+            <dt class="col-sm-2">Telefone</dt>
+            <dd class="col-sm-10">@medico.Telefone</dd>
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@medico.Email</dd>
+            <dt class="col-sm-2">CRM</dt>
             <dd class="col-sm-10">@medico.Crm</dd>
             <dt class="col-sm-2">Especialidade</dt>
             <dd class="col-sm-10">@medico.Especialidade</dd>
         </dl>
         <div>
-            <a href="@($"/medicos/edit?idfuncionario={medico.IdFuncionario}")">Edit</a> |
-            <a href="@($"/medicos")">Back to List</a>
+            <a href="@($"/medicos/edit?idfuncionario={medico.IdFuncionario}")">Editar</a> |
+            <a href="@($"/medicos")">Voltar</a>
         </div>
     }
 </div>
@@ -34,8 +41,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //medico = await context.Medico.FirstOrDefaultAsync(m => m.IdFuncionario == IdFuncionario);
+        medico = await MedicoService.GetMedicoByIdFuncionarioAsync(IdFuncionario);
 
         if (medico is null)
         {

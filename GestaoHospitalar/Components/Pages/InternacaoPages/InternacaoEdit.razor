@@ -1,15 +1,19 @@
 ﻿@page "/internacoes/edit"
 @inject NavigationManager NavigationManager
+@inject IInternacaoService InternacaoService
+@inject IPacienteService PacienteService
+@inject IMedicoService MedicoService
+@inject ISnackbar Snackbar
 
-<PageTitle>Edit</PageTitle>
+<PageTitle>Editar</PageTitle>
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h2>Internacao</h2>
+<h2>Internação</h2>
 <hr />
-@if (Internacao is null)
+@if (Internacao is null || medicos is null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Carregando...</em></p>
 }
 else
 {
@@ -19,44 +23,47 @@ else
                 <DataAnnotationsValidator />
                 <ValidationSummary />
                 <input type="hidden" name="Internacao.IdInternacao" value="@Internacao.IdInternacao" />
+
                 <div class="mb-3">
-                    <label for="idpaciente" class="form-label">IdPaciente:</label>
-                    <InputText id="idpaciente" @bind-Value="Internacao.IdPaciente" class="form-control" />
-                    <ValidationMessage For="() => Internacao.IdPaciente" class="text-danger" />
+                    <label for="responsavel">Responsável</label>
+                    <InputSelect id="responsavel" class="form-control" @bind-Value="Internacao.IdResponsavel">
+                        <option value="0">-- Selecione --</option>
+                        @foreach (var medico in medicos!)
+                        {
+                            <option value="@medico.IdFuncionario">@medico.Nome (@medico.Especialidade)</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => Internacao.IdResponsavel)" />
                 </div>
                 <div class="mb-3">
-                    <label for="idquarto" class="form-label">IdQuarto:</label>
+                    <label for="idquarto" class="form-label">Quarto:</label>
                     <InputNumber id="idquarto" @bind-Value="Internacao.IdQuarto" class="form-control" />
                     <ValidationMessage For="() => Internacao.IdQuarto" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="dataentrada" class="form-label">DataEntrada:</label>
+                    <label for="dataentrada" class="form-label">Data de Entrada:</label>
                     <InputDate id="dataentrada" @bind-Value="Internacao.DataEntrada" class="form-control" />
                     <ValidationMessage For="() => Internacao.DataEntrada" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="datasaida" class="form-label">DataSaida:</label>
+                    <label for="datasaida" class="form-label">Data de Saida:</label>
                     <InputDate id="datasaida" @bind-Value="Internacao.DataSaida" class="form-control" />
                     <ValidationMessage For="() => Internacao.DataSaida" class="text-danger" />
                 </div>
-                <div class="mb-3">
-                    <label for="idresponsavel" class="form-label">IdResponsavel:</label>
-                    <InputNumber id="idresponsavel" @bind-Value="Internacao.IdResponsavel" class="form-control" />
-                    <ValidationMessage For="() => Internacao.IdResponsavel" class="text-danger" />
-                </div>
+
                 <div class="mb-3">
                     <label for="tratamento" class="form-label">Tratamento:</label>
                     <InputText id="tratamento" @bind-Value="Internacao.Tratamento" class="form-control" />
                     <ValidationMessage For="() => Internacao.Tratamento" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </EditForm>
         </div>
     </div>
 }
 
 <div>
-    <a href="/internacaos">Back to List</a>
+    <a href="/internacoes">Voltar</a>
 </div>
 
 @code {
@@ -66,10 +73,13 @@ else
     [SupplyParameterFromForm]
     private Internacao? Internacao { get; set; }
 
+    
+    private IEnumerable<Medico>? medicos;
+
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        // Internacao ??= await context.Internacao.FirstOrDefaultAsync(m => m.IdInternacao == IdInternacao);
+        medicos = await MedicoService.GetMedicosAsync();
+        Internacao = await InternacaoService.GetInternacaoByIdAsync(IdInternacao);
 
         if (Internacao is null)
         {
@@ -77,35 +87,20 @@ else
         }
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdateInternacao()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //context.Attach(Internacao!).State = EntityState.Modified;
-        /*
         try
-    {
-    await context.SaveChangesAsync();
-    }
-    catch (DbUpdateConcurrencyException)
         {
-        if (!InternacaoExists(Internacao!.IdInternacao))
-            {
-            NavigationManager.NavigateTo("notfound");
+            await InternacaoService.UpdateInternacaoAsync(Internacao!);
+            NavigationManager.NavigateTo("/internacoes");
         }
-        else
+        catch (Exception e)
         {
-        throw;
-    }
-    }
-        */
-        NavigationManager.NavigateTo("/internacaos");
+
+            Snackbar.Add("Erro ao editar internação." + e.Message, Severity.Error);
+
+        }
+
     }
 
-    private bool InternacaoExists(int idinternacao)
-    {
-        //using var context = DbFactory.CreateDbContext();
-        return false; // context.Internacao.Any(e => e.IdInternacao == idinternacao);
-    }
 }

@@ -5,6 +5,7 @@
 @inject IPacienteService PacienteService
 @inject IMedicoService MedicoService
 @inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
 
 <PageTitle>Agendar Consulta</PageTitle>
 
@@ -89,10 +90,19 @@ else
 
     private async Task HandleValidSubmit()
     {
-        // Simulando o usuário logado;
-        novoAgendamento.IdSecretario = 6;
-        await AgendamentoService.CreateAgendamentoAsync(novoAgendamento);
-        NavigationManager.NavigateTo("/agendamentos");
+
+        try
+        {
+            // Simulando o usuário logado;
+            novoAgendamento.IdSecretario = 6;
+            await AgendamentoService.CreateAgendamentoAsync(novoAgendamento);
+            NavigationManager.NavigateTo("/agendamentos");
+        }
+        catch (Exception e)
+        {
+
+            Snackbar.Add("Erro ao inserir Agendamento." + e.Message, Severity.Error);
+        }
     }
 
     private void Cancelar()

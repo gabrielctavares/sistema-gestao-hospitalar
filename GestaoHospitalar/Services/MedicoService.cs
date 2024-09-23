@@ -17,27 +17,39 @@ public class MedicoService(MySqlConnection connection) : IMedicoService
 {
     public async Task<IEnumerable<Medico>> GetMedicosAsync()
     {
-        var sql = @"SELECT f.id_funcionario, f.CPF, f.nome, f.endereco, f.telefone, f.email, 
+        try
+        {
+            var sql = @"SELECT f.id_funcionario, f.CPF, f.nome, f.endereco, f.telefone, f.email, 
                         m.crm, m.especialidade
                         FROM funcionario f
                         INNER JOIN medico m ON f.id_funcionario = m.id_funcionario;";
-        await connection.OpenAsync();
-        var medicos = await connection.QueryAsync<Medico>(sql);
-        await connection.CloseAsync();
-        return medicos;
+            await connection.OpenAsync();
+            var medicos = await connection.QueryAsync<Medico>(sql);
+            return medicos;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
     }
 
     public async Task<Medico?> GetMedicoByIdFuncionarioAsync(int id)
     {
-        var sql = @"SELECT f.id_funcionario, f.CPF, f.nome, f.endereco, f.telefone, f.email, 
+        try
+        {
+            var sql = @"SELECT f.id_funcionario, f.CPF, f.nome, f.endereco, f.telefone, f.email, 
                         m.crm, m.especialidade
                         FROM funcionario f
                         INNER JOIN medico m ON f.id_funcionario = m.id_funcionario
-                        WHERE id_funcionario = @IdFuncionario;";
-        await connection.OpenAsync();
-        var medico = await connection.QuerySingleOrDefaultAsync<Medico>(sql, new { IdFuncionario = id });
-        await connection.CloseAsync();
-        return medico;
+                        WHERE f.id_funcionario = @IdFuncionario;";
+            await connection.OpenAsync();
+            var medico = await connection.QuerySingleOrDefaultAsync<Medico>(sql, new { IdFuncionario = id });
+            return medico;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
     }
 
     public async Task<bool> CreateMedicoAsync(Medico medico)
@@ -73,14 +85,16 @@ public class MedicoService(MySqlConnection connection) : IMedicoService
             );
 
             await transaction.CommitAsync();
-            await connection.CloseAsync();
             return result > 0;
         }
         catch
         {
             await transaction.RollbackAsync();
-            await connection.CloseAsync();
             throw;
+        }
+        finally
+        {
+           await connection.CloseAsync();
         }
     }
 
@@ -117,14 +131,16 @@ public class MedicoService(MySqlConnection connection) : IMedicoService
             );
 
             await transaction.CommitAsync();
-            await connection.CloseAsync();
             return result > 0;
         }
         catch
         {
             await transaction.RollbackAsync();
-            await connection.CloseAsync();
             throw;
+        }
+        finally
+        {
+            await connection.CloseAsync();
         }
     }
 
@@ -151,14 +167,15 @@ public class MedicoService(MySqlConnection connection) : IMedicoService
             );
 
             await transaction.CommitAsync();
-            await connection.CloseAsync();
             return true;
         }
         catch
         {
             await transaction.RollbackAsync();
-            await connection.CloseAsync();
             return false;
+        }
+        finally { 
+          await connection.CloseAsync();
         }
     }
 }

@@ -57,10 +57,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/EstoqueAbaixoMinimoIndex.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3RvcXVlQWJhaXhvTWluaW1vSW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
 [G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
@@ -123,10 +119,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientePages/PacienteIndex.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZVBhZ2VzXFBhY2llbnRlSW5kZXgucmF6b3I=
-build_metadata.AdditionalFiles.CssScope = 
-
-[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientesAtendimento.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZXNBdGVuZGltZW50by5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Routes.razor]

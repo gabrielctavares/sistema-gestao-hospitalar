@@ -12,11 +12,17 @@ public class EstoqueMedicamentoService(MySqlConnection connection) : IEstoqueMed
 {
     public async Task<IEnumerable<EstoqueMedicamentosAbaixoMinimo>> GetMedicamentosAbaixoMinimoAsync()
     {
-        var sql = "SELECT * FROM estoque_medicamentos_abaixo_minimo;";
-        await connection.OpenAsync();
-        var estoqueAbaixoMinimo = await connection.QueryAsync<EstoqueMedicamentosAbaixoMinimo>(sql);
-        await connection.CloseAsync();
-        return estoqueAbaixoMinimo;
+        try
+        {
+            var sql = "SELECT * FROM estoque_medicamentos_abaixo_minimo;";
+            await connection.OpenAsync();
+            var estoqueAbaixoMinimo = await connection.QueryAsync<EstoqueMedicamentosAbaixoMinimo>(sql);
+            return estoqueAbaixoMinimo;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
     }
 }
 

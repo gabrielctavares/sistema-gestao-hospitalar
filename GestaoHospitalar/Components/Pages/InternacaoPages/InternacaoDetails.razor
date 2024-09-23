@@ -1,35 +1,36 @@
 ﻿@page "/internacoes/details"
 @inject NavigationManager NavigationManager
+@inject IInternacaoService InternacaoService
 
-<PageTitle>Details</PageTitle>
+<PageTitle>Detalhes</PageTitle>
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
-    <h2>Internacao</h2>
+    <h2>Internação</h2>
     <hr />
     @if (internacao is null)
     {
-        <p><em>Loading...</em></p>
+        <p><em>Carregando...</em></p>
     }
     else {
         <dl class="row">
-            <dt class="col-sm-2">IdPaciente</dt>
-            <dd class="col-sm-10">@internacao.IdPaciente</dd>
-            <dt class="col-sm-2">IdQuarto</dt>
+            <dt class="col-sm-2">Paciente</dt>
+            <dd class="col-sm-10">(@internacao.IdPaciente) - @internacao.NomePaciente</dd>
+            <dt class="col-sm-2">Quarto</dt>
             <dd class="col-sm-10">@internacao.IdQuarto</dd>
-            <dt class="col-sm-2">DataEntrada</dt>
+            <dt class="col-sm-2">Data de Entrada</dt>
             <dd class="col-sm-10">@internacao.DataEntrada</dd>
-            <dt class="col-sm-2">DataSaida</dt>
+            <dt class="col-sm-2">Data de Saida</dt>
             <dd class="col-sm-10">@internacao.DataSaida</dd>
-            <dt class="col-sm-2">IdResponsavel</dt>
-            <dd class="col-sm-10">@internacao.IdResponsavel</dd>
+            <dt class="col-sm-2">Responsável</dt>
+            <dd class="col-sm-10">(@internacao.IdResponsavel) - @internacao.NomeResponsavel</dd>
             <dt class="col-sm-2">Tratamento</dt>
             <dd class="col-sm-10">@internacao.Tratamento</dd>
         </dl>
         <div>
-            <a href="@($"/internacaos/edit?idinternacao={internacao.IdInternacao}")">Edit</a> |
-            <a href="@($"/internacaos")">Back to List</a>
+            <a href="@($"/internacoes/edit?idinternacao={internacao.IdInternacao}")">Editar</a> |
+            <a href="@($"/internacoes")">Voltar</a>
         </div>
     }
 </div>
@@ -42,8 +43,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //internacao = await context.Internacao.FirstOrDefaultAsync(m => m.IdInternacao == IdInternacao);
+        internacao = await InternacaoService.GetInternacaoByIdAsync(IdInternacao);
 
         if (internacao is null)
         {

@@ -1,15 +1,17 @@
 ﻿@page "/pacientes/edit"
 @inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+@inject IPacienteService PacienteService
 
-<PageTitle>Edit</PageTitle>
+<PageTitle>Editar</PageTitle>
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
 <h2>Paciente</h2>
 <hr />
 @if (Paciente is null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Carregando...</em></p>
 }
 else
 {
@@ -25,12 +27,12 @@ else
                     <ValidationMessage For="() => Paciente.Nome" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="datanascimento" class="form-label">DataNascimento:</label>
+                    <label for="datanascimento" class="form-label">Data de Nascimento:</label>
                     <InputDate id="datanascimento" @bind-Value="Paciente.DataNascimento" class="form-control" />
                     <ValidationMessage For="() => Paciente.DataNascimento" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="endereco" class="form-label">Endereco:</label>
+                    <label for="endereco" class="form-label">Endereço:</label>
                     <InputText id="endereco" @bind-Value="Paciente.Endereco" class="form-control" />
                     <ValidationMessage For="() => Paciente.Endereco" class="text-danger" />
                 </div>
@@ -45,33 +47,42 @@ else
                     <ValidationMessage For="() => Paciente.Email" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="tiposanguineo" class="form-label">TipoSanguineo:</label>
-                    <InputText id="tiposanguineo" @bind-Value="Paciente.TipoSanguineo" class="form-control" />
+                    <label for="tiposanguineo" class="form-label">Tipo Sanguíneo:</label>
+                    <InputSelect id="tiposanguineo" class="form-control" @bind-Value="Paciente.TipoSanguineo">
+                        <option value="A-">A-</option>
+                        <option value="A+">A+</option>
+                        <option value="B-">B-</option>
+                        <option value="B+">B+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="O-">O-</option>
+                        <option value="O+">O+</option>
+                    </InputSelect>
                     <ValidationMessage For="() => Paciente.TipoSanguineo" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="contatoemergencianome" class="form-label">ContatoEmergenciaNome:</label>
+                    <label for="contatoemergencianome" class="form-label">Nome do Contato de Emergência:</label>
                     <InputText id="contatoemergencianome" @bind-Value="Paciente.ContatoEmergenciaNome" class="form-control" />
                     <ValidationMessage For="() => Paciente.ContatoEmergenciaNome" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="contatoemergenciatelefone" class="form-label">ContatoEmergenciaTelefone:</label>
+                    <label for="contatoemergenciatelefone" class="form-label">Telefone do Contato de Emergência:</label>
                     <InputText id="contatoemergenciatelefone" @bind-Value="Paciente.ContatoEmergenciaTelefone" class="form-control" />
                     <ValidationMessage For="() => Paciente.ContatoEmergenciaTelefone" class="text-danger" />
                 </div>
                 <div class="mb-3">
-                    <label for="contatoemergenciarelacao" class="form-label">ContatoEmergenciaRelacao:</label>
+                    <label for="contatoemergenciarelacao" class="form-label">Relação do Contato de Emergência:</label>
                     <InputText id="contatoemergenciarelacao" @bind-Value="Paciente.ContatoEmergenciaRelacao" class="form-control" />
                     <ValidationMessage For="() => Paciente.ContatoEmergenciaRelacao" class="text-danger" />
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
             </EditForm>
         </div>
     </div>
 }
 
 <div>
-    <a href="/pacientes">Back to List</a>
+    <a href="/pacientes">Voltar</a>
 </div>
 
 @code {
@@ -83,8 +94,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //Paciente ??= await context.Paciente.FirstOrDefaultAsync(m => m.Cpf == Cpf);
+        Paciente = await PacienteService.GetPacienteByCpfAsync(Cpf);
 
         if (Paciente is null)
         {
@@ -92,36 +102,19 @@ else
         }
     }
 
-    // To protect from overposting attacks, enable the specific properties you want to bind to.
-    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
     private async Task UpdatePaciente()
     {
-        /*
-        using var context = DbFactory.CreateDbContext();
-        context.Attach(Paciente!).State = EntityState.Modified;
 
         try
         {
-            await context.SaveChangesAsync();
+            await PacienteService.UpdatePacienteAsync(Paciente!);
+            NavigationManager.NavigateTo("/pacientes");
         }
-        catch (DbUpdateConcurrencyException)
+        catch (Exception e)
         {
-            if (!PacienteExists(Paciente!.Cpf))
-            {
-                NavigationManager.NavigateTo("notfound");
-            }
-            else
-            {
-                throw;
-            }
-        }
-        */
-        NavigationManager.NavigateTo("/pacientes");
-    }
 
-    private bool PacienteExists(string cpf)
-    {
-        //using var context = DbFactory.CreateDbContext();
-        return false; //context.Paciente.Any(e => e.Cpf == cpf);
+            Snackbar.Add("Erro ao editar pacientes." + e.Message, Severity.Error);
+
+        }
     }
 }

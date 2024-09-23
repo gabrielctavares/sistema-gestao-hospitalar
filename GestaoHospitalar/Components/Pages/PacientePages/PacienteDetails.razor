@@ -1,19 +1,23 @@
 ﻿@page "/pacientes/details"
 @inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+@inject IPacienteService PacienteService
 
-<PageTitle>Details</PageTitle>
+<PageTitle>Detalhes</PageTitle>
 
-<h1>Details</h1>
+<h1>Detalhes</h1>
 
 <div>
     <h2>Paciente</h2>
     <hr />
     @if (paciente is null)
     {
-        <p><em>Loading...</em></p>
+        <p><em>Carregando...</em></p>
     }
     else {
         <dl class="row">
+            <dt class="col-sm-2">CPF</dt>
+            <dd class="col-sm-10">@paciente.Cpf</dd>
             <dt class="col-sm-2">Nome</dt>
             <dd class="col-sm-10">@paciente.Nome</dd>
             <dt class="col-sm-2">DataNascimento</dt>
@@ -24,18 +28,12 @@
             <dd class="col-sm-10">@paciente.Telefone</dd>
             <dt class="col-sm-2">Email</dt>
             <dd class="col-sm-10">@paciente.Email</dd>
-            <dt class="col-sm-2">TipoSanguineo</dt>
+            <dt class="col-sm-2">Tipo Sanguíneo</dt>
             <dd class="col-sm-10">@paciente.TipoSanguineo</dd>
-            <dt class="col-sm-2">ContatoEmergenciaNome</dt>
-            <dd class="col-sm-10">@paciente.ContatoEmergenciaNome</dd>
-            <dt class="col-sm-2">ContatoEmergenciaTelefone</dt>
-            <dd class="col-sm-10">@paciente.ContatoEmergenciaTelefone</dd>
-            <dt class="col-sm-2">ContatoEmergenciaRelacao</dt>
-            <dd class="col-sm-10">@paciente.ContatoEmergenciaRelacao</dd>
         </dl>
         <div>
-            <a href="@($"/pacientes/edit?cpf={paciente.Cpf}")">Edit</a> |
-            <a href="@($"/pacientes")">Back to List</a>
+            <a href="@($"/pacientes/edit?cpf={paciente.Cpf}")">Editar</a> |
+            <a href="@($"/pacientes")">Voltar</a>
         </div>
     }
 </div>
@@ -48,12 +46,12 @@
 
     protected override async Task OnInitializedAsync()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //paciente = await context.Paciente.FirstOrDefaultAsync(m => m.Cpf == Cpf);
-
+        paciente = await PacienteService.GetPacienteByCpfAsync(Cpf);
+        
         if (paciente is null)
         {
-            NavigationManager.NavigateTo("notfound");
+            Snackbar.Add("Agendamento não encontrado.", Severity.Error);
+            NavigationManager.NavigateTo("/notfound");
         }
     }
 }

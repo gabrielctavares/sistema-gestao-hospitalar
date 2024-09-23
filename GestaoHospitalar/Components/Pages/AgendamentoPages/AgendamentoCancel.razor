@@ -60,8 +60,15 @@
     }
 
     private async Task CancelAgendamento()
-    {        
-        await AgendamentoService.CancelAgendamentoAsync(agendamento!.IdAgendamento);
-        NavigationManager.NavigateTo("/agendamentos");
+    {      
+        try
+        {
+            await AgendamentoService.CancelAgendamentoAsync(agendamento!.IdAgendamento);
+            NavigationManager.NavigateTo("/agendamentos");
+        }
+        catch (Exception e)
+        {
+            Snackbar.Add("Erro ao editar Agendamento." + e.Message, Severity.Error);
+        }
     }
 }

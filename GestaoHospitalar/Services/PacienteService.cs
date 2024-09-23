@@ -19,39 +19,61 @@ public class PacienteService(MySqlConnection connection) : IPacienteService
 {
     public async Task<IEnumerable<Paciente>> GetPacientesAsync()
     {
-        var sql = "SELECT * FROM paciente;";
-        await connection.OpenAsync();
-        var pacientes = await connection.QueryAsync<Paciente>(sql);
-        await connection.CloseAsync();
-        return pacientes;
+        try
+        {
+            var sql = "SELECT * FROM paciente;";
+            await connection.OpenAsync();
+            var pacientes = await connection.QueryAsync<Paciente>(sql);
+            return pacientes;
+
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
     }
 
     public async Task<Paciente?> GetPacienteByCpfAsync(string cpf)
     {
-        var sql = "SELECT * FROM paciente WHERE CPF = @Cpf;";
-        await connection.OpenAsync();
-        var paciente = await connection.QuerySingleOrDefaultAsync<Paciente>(sql, new { Cpf = cpf });
-        await connection.CloseAsync();
-        return paciente;
+        try
+        {
+            var sql = "SELECT * FROM paciente WHERE CPF = @Cpf;";
+            await connection.OpenAsync();
+            var paciente = await connection.QuerySingleOrDefaultAsync<Paciente>(sql, new { Cpf = cpf });
+            return paciente;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
     }
 
     public async Task<bool> CreatePacienteAsync(Paciente paciente)
     {
-        var sql = @"INSERT INTO paciente 
+        try
+        {
+            var sql = @"INSERT INTO paciente 
                         (CPF, nome, data_nascimento, endereco, telefone, email, tipo_sanguineo, 
                         contato_emergencia_nome, contato_emergencia_telefone, contato_emergencia_relacao)
                         VALUES 
                         (@Cpf, @Nome, @DataNascimento, @Endereco, @Telefone, @Email, @TipoSanguineo, 
                         @ContatoEmergenciaNome, @ContatoEmergenciaTelefone, @ContatoEmergenciaRelacao);";
-        await connection.OpenAsync();
-        var result = await connection.ExecuteAsync(sql, paciente);
-        await connection.CloseAsync();
-        return result > 0;
+            await connection.OpenAsync();
+            var result = await connection.ExecuteAsync(sql, paciente);
+            return result > 0;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+
     }
 
     public async Task<bool> UpdatePacienteAsync(Paciente paciente)
     {
-        var sql = @"UPDATE paciente SET 
+        try
+        {
+            var sql = @"UPDATE paciente SET 
                         nome = @Nome,
                         data_nascimento = @DataNascimento,
                         endereco = @Endereco,
@@ -62,27 +84,46 @@ public class PacienteService(MySqlConnection connection) : IPacienteService
                         contato_emergencia_telefone = @ContatoEmergenciaTelefone,
                         contato_emergencia_relacao = @ContatoEmergenciaRelacao
                         WHERE CPF = @Cpf;";
-        await connection.OpenAsync();
-        var result = await connection.ExecuteAsync(sql, paciente);
-        await connection.CloseAsync();
-        return result > 0;
+            await connection.OpenAsync();
+            var result = await connection.ExecuteAsync(sql, paciente);
+            return result > 0;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+
     }
 
     public async Task<bool> DeletePacienteAsync(string cpf)
     {
-        var sql = "DELETE FROM paciente WHERE CPF = @Cpf;";
-        await connection.OpenAsync();
-        var result = await connection.ExecuteAsync(sql, new { Cpf = cpf });
-        await connection.CloseAsync();
-        return result > 0;
+        try
+        {
+            var sql = "DELETE FROM paciente WHERE CPF = @Cpf;";
+            await connection.OpenAsync();
+            var result = await connection.ExecuteAsync(sql, new { Cpf = cpf });
+            return result > 0;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+
     }
 
     public async Task<IEnumerable<PacientesAtendimento>> GetAllPacientesAtendimentos()
     {
-        var sql = "SELECT * FROM pacientes_atendimento;";
-        await connection.OpenAsync();
-        var pacientes = await connection.QueryAsync<PacientesAtendimento>(sql);
-        await connection.CloseAsync();
-        return pacientes;
+        try
+        {
+            var sql = "SELECT * FROM pacientes_atendimento;";
+            await connection.OpenAsync();
+            var pacientes = await connection.QueryAsync<PacientesAtendimento>(sql);
+            return pacientes;
+        }
+        finally
+        {
+            await connection.CloseAsync();
+        }
+
     }
 }

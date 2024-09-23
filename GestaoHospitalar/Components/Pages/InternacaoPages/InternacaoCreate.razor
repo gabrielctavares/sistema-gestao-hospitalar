@@ -1,66 +1,121 @@
 ﻿@page "/internacoes/create"
 @inject NavigationManager NavigationManager
+@inject IInternacaoService InternacaoService
+@inject IPacienteService PacienteService
+@inject IMedicoService MedicoService
+@inject ISnackbar Snackbar
 
-<PageTitle>Create</PageTitle>
+<PageTitle>Registrar</PageTitle>
 
-<h1>Create</h1>
+<h1>Registrar</h1>
 
-<h2>Internacao</h2>
+<h2>Internação</h2>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <EditForm method="post" Model="Internacao" OnValidSubmit="AddInternacao" FormName="create" Enhance>
-            <DataAnnotationsValidator />
-            <ValidationSummary class="text-danger" />
-            <div class="mb-3">
-                <label for="idpaciente" class="form-label">IdPaciente:</label> 
-                <InputText id="idpaciente" @bind-Value="Internacao.IdPaciente" class="form-control" /> 
-                <ValidationMessage For="() => Internacao.IdPaciente" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="idquarto" class="form-label">IdQuarto:</label> 
-                <InputNumber id="idquarto" @bind-Value="Internacao.IdQuarto" class="form-control" /> 
-                <ValidationMessage For="() => Internacao.IdQuarto" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="dataentrada" class="form-label">DataEntrada:</label> 
-                <InputDate id="dataentrada" @bind-Value="Internacao.DataEntrada" class="form-control" /> 
-                <ValidationMessage For="() => Internacao.DataEntrada" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="datasaida" class="form-label">DataSaida:</label> 
-                <InputDate id="datasaida" @bind-Value="Internacao.DataSaida" class="form-control" /> 
-                <ValidationMessage For="() => Internacao.DataSaida" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="idresponsavel" class="form-label">IdResponsavel:</label> 
-                <InputNumber id="idresponsavel" @bind-Value="Internacao.IdResponsavel" class="form-control" /> 
-                <ValidationMessage For="() => Internacao.IdResponsavel" class="text-danger" /> 
-            </div>        
-            <div class="mb-3">
-                <label for="tratamento" class="form-label">Tratamento:</label> 
-                <InputText id="tratamento" @bind-Value="Internacao.Tratamento" class="form-control" /> 
-                <ValidationMessage For="() => Internacao.Tratamento" class="text-danger" /> 
-            </div>        
-            <button type="submit" class="btn btn-primary">Create</button>
-        </EditForm>
+
+@if (pacientes == null || medicos == null)
+{
+    <p>Carregando...</p>
+}
+else if (!pacientes.Any())
+{
+    <p>Não há pacientes cadastrados.</p>
+}
+else if (!medicos.Any())
+{
+    <p>Não há médicos cadastrados.</p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Internacao" OnValidSubmit="AddInternacao" FormName="create" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary class="text-danger" />            
+                <div class="mb-3">
+                    <label for="Paciente">Paciente</label>
+                    <InputSelect id="Paciente" class="form-control" @bind-Value="Internacao.IdPaciente">
+                        <option value="">-- Selecione --</option>
+                        @foreach (var paciente in pacientes!)
+                        {
+                            <option value="@paciente.Cpf">@paciente.Nome</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => Internacao.IdPaciente)" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="responsavel">Responsável</label>
+                    <InputSelect id="responsavel" class="form-control" @bind-Value="Internacao.IdResponsavel">
+                        <option value="0">-- Selecione --</option>
+                        @foreach (var medico in medicos!)
+                        {
+                            <option value="@medico.IdFuncionario">@medico.Nome (@medico.Especialidade)</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => Internacao.IdResponsavel)" />
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="idquarto" class="form-label">Quarto:</label> 
+                    <InputNumber id="idquarto" @bind-Value="Internacao.IdQuarto" class="form-control" /> 
+                    <ValidationMessage For="() => Internacao.IdQuarto" class="text-danger" /> 
+                </div>        
+                <div class="mb-3">
+                    <label for="dataentrada" class="form-label">Data de Entrada:</label> 
+                    <InputDate id="dataentrada" @bind-Value="Internacao.DataEntrada" class="form-control" /> 
+                    <ValidationMessage For="() => Internacao.DataEntrada" class="text-danger" /> 
+                </div>        
+                <div class="mb-3">
+                    <label for="datasaida" class="form-label">Data de Saida:</label> 
+                    <InputDate id="datasaida" @bind-Value="Internacao.DataSaida" class="form-control" /> 
+                    <ValidationMessage For="() => Internacao.DataSaida" class="text-danger" /> 
+                </div>          
+                <div class="mb-3">
+                    <label for="tratamento" class="form-label">Tratamento:</label> 
+                    <InputText id="tratamento" @bind-Value="Internacao.Tratamento" class="form-control" /> 
+                    <ValidationMessage For="() => Internacao.Tratamento" class="text-danger" /> 
+                </div>
+                <div class="form-group" style="margin-top: 20px">
+                    <button type="submit" class="btn btn-success">Registrar</button>
+                    <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+                </div>
+            </EditForm>
+        </div>
     </div>
-</div>
 
-<div>
-    <a href="/internacaos">Back to List</a>
-</div>
-
+}
 @code {
     [SupplyParameterFromForm]
     private Internacao Internacao { get; set; } = new();
 
-    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private IEnumerable<Paciente>? pacientes;
+    private IEnumerable<Medico>? medicos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pacientes = await PacienteService.GetPacientesAsync();
+        medicos = await MedicoService.GetMedicosAsync();
+    }
+
     private async Task AddInternacao()
     {
-        //using var context = DbFactory.CreateDbContext();
-        //context.Internacao.Add(Internacao);
-        //await context.SaveChangesAsync();
-        NavigationManager.NavigateTo("/internacaos");
+        try
+        {
+            await InternacaoService.CreateInternacaoAsync(Internacao);
+
+            NavigationManager.NavigateTo("/internacoes");
+        }
+        catch (Exception e)
+        {
+
+            Snackbar.Add("Erro ao inserir Internação." + e.Message, Severity.Error);
+        }
     }
+
+    private void Cancelar()
+    {
+        NavigationManager.NavigateTo("/internacoes");
+    }
+
 }
