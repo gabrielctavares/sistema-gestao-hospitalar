@@ -1,0 +1,102 @@
+﻿@page "/agendamentos/create"
+@using GestaoHospitalar.Models
+@using GestaoHospitalar.Services
+@inject IAgendamentoService AgendamentoService
+@inject IPacienteService PacienteService
+@inject IMedicoService MedicoService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Agendar Consulta</PageTitle>
+
+<h1>Agendar Consulta</h1>
+
+@if (pacientes == null || medicos == null)
+{
+    <p>Carregando...</p>
+}
+else if (!pacientes.Any())
+{
+    <p>Não há pacientes cadastrados.</p>
+}
+else if (!medicos.Any())
+{
+    <p>Não há médicos cadastrados.</p>
+}
+else
+{
+    <EditForm Model="novoAgendamento" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="form-group">
+            <label for="Paciente">Paciente</label>
+            <InputSelect id="Paciente" class="form-control" @bind-Value="novoAgendamento.IdPaciente">
+                <option value="">-- Selecione --</option>
+                @foreach (var paciente in pacientes!)
+                {
+                    <option value="@paciente.Cpf">@paciente.Nome</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => novoAgendamento.IdPaciente)" />
+        </div>
+
+        <div class="form-group">
+            <label for="Medico">Médico</label>
+            <InputSelect id="Medico" class="form-control" @bind-Value="novoAgendamento.IdMedico">
+                <option value="0">-- Selecione --</option>
+                @foreach (var medico in medicos!)
+                {
+                    <option value="@medico.IdFuncionario">@medico.Nome (@medico.Especialidade)</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="@(() => novoAgendamento.IdMedico)" />
+        </div>
+
+        <div class="form-group">
+            <label for="Data">Data da Consulta</label>
+            <InputDate id="Data" Type="InputDateType.DateTimeLocal" class="form-control" @bind-Value="@novoAgendamento.DataAgendamento" />
+            <ValidationMessage For="@(() => novoAgendamento.DataAgendamento)" />
+        </div>
+
+        <div class="form-group">
+            <label for="Status">Status</label>
+            <InputSelect id="Status" class="form-control" @bind-Value="novoAgendamento.Status">
+                <option value="pendente">Pendente</option>
+                <option value="confirmado">Confirmado</option>
+            </InputSelect>
+        </div>
+
+        <div class="form-group" style="margin-top: 20px">
+            <button type="submit" class="btn btn-success">Agendar</button>
+            <button type="button" class="btn btn-secondary" @onclick="Cancelar">Cancelar</button>
+        </div>
+
+    </EditForm>
+
+}
+
+
+@code {
+    private Agendamento novoAgendamento = new Agendamento();
+    private IEnumerable<Paciente>? pacientes;
+    private IEnumerable<Medico>? medicos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        pacientes = await PacienteService.GetPacientesAsync();
+        medicos = await MedicoService.GetMedicosAsync();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        // Simulando o usuário logado;
+        novoAgendamento.IdSecretario = 6;
+        await AgendamentoService.CreateAgendamentoAsync(novoAgendamento);
+        NavigationManager.NavigateTo("/agendamentos");
+    }
+
+    private void Cancelar()
+    {
+        NavigationManager.NavigateTo("/agendamentos");
+    }
+}

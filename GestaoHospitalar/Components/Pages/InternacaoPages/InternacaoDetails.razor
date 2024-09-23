@@ -1,0 +1,53 @@
+﻿@page "/internacoes/details"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Internacao</h2>
+    <hr />
+    @if (internacao is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">IdPaciente</dt>
+            <dd class="col-sm-10">@internacao.IdPaciente</dd>
+            <dt class="col-sm-2">IdQuarto</dt>
+            <dd class="col-sm-10">@internacao.IdQuarto</dd>
+            <dt class="col-sm-2">DataEntrada</dt>
+            <dd class="col-sm-10">@internacao.DataEntrada</dd>
+            <dt class="col-sm-2">DataSaida</dt>
+            <dd class="col-sm-10">@internacao.DataSaida</dd>
+            <dt class="col-sm-2">IdResponsavel</dt>
+            <dd class="col-sm-10">@internacao.IdResponsavel</dd>
+            <dt class="col-sm-2">Tratamento</dt>
+            <dd class="col-sm-10">@internacao.Tratamento</dd>
+        </dl>
+        <div>
+            <a href="@($"/internacaos/edit?idinternacao={internacao.IdInternacao}")">Edit</a> |
+            <a href="@($"/internacaos")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Internacao? internacao;
+
+    [SupplyParameterFromQuery]
+    private int IdInternacao { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //internacao = await context.Internacao.FirstOrDefaultAsync(m => m.IdInternacao == IdInternacao);
+
+        if (internacao is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

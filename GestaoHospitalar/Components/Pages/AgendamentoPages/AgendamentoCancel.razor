@@ -1,0 +1,67 @@
+﻿@page "/agendamentos/cancel"
+@inject NavigationManager NavigationManager
+@inject IAgendamentoService AgendamentoService
+@inject ISnackbar Snackbar
+
+<PageTitle>Cancelar</PageTitle>
+
+<h1>Cancelar Agendamento</h1>
+
+<p>Tem certeza que deseja cancelar o agendamento?</p>
+<div>
+    <h2>Agendamento</h2>
+    <hr />
+    @if (agendamento is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Paciente</dt>
+            <dd class="col-sm-10">@agendamento.NomePaciente</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">Secretário</dt>
+            <dd class="col-sm-10">@agendamento.NomeSecretario</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">Médico</dt>
+            <dd class="col-sm-10">@agendamento.NomeMedico</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">DataAgendamento</dt>
+            <dd class="col-sm-10">@agendamento.DataAgendamento</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">Status</dt>
+            <dd class="col-sm-10">@agendamento.Status</dd>
+        </dl>
+        <EditForm method="post" Model="agendamento" OnValidSubmit="CancelAgendamento" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(agendamento is null)">Cancelar</button> |
+            <a href="/agendamentos">Voltar</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Agendamento? agendamento;
+
+    [SupplyParameterFromQuery]
+    private int IdAgendamento { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        agendamento = await AgendamentoService.GetAgendamentoByIdAsync(IdAgendamento);
+        if (agendamento is null)
+        {
+            Snackbar.Add("Agendamento não encontrado.", Severity.Error);
+            NavigationManager.NavigateTo("/notfound");
+        }
+    }
+
+    private async Task CancelAgendamento()
+    {        
+        await AgendamentoService.CancelAgendamentoAsync(agendamento!.IdAgendamento);
+        NavigationManager.NavigateTo("/agendamentos");
+    }
+}

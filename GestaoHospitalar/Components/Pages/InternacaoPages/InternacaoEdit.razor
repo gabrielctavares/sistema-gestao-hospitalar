@@ -1,0 +1,111 @@
+﻿@page "/internacoes/edit"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Internacao</h2>
+<hr />
+@if (Internacao is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Internacao" OnValidSubmit="UpdateInternacao" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="Internacao.IdInternacao" value="@Internacao.IdInternacao" />
+                <div class="mb-3">
+                    <label for="idpaciente" class="form-label">IdPaciente:</label>
+                    <InputText id="idpaciente" @bind-Value="Internacao.IdPaciente" class="form-control" />
+                    <ValidationMessage For="() => Internacao.IdPaciente" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="idquarto" class="form-label">IdQuarto:</label>
+                    <InputNumber id="idquarto" @bind-Value="Internacao.IdQuarto" class="form-control" />
+                    <ValidationMessage For="() => Internacao.IdQuarto" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="dataentrada" class="form-label">DataEntrada:</label>
+                    <InputDate id="dataentrada" @bind-Value="Internacao.DataEntrada" class="form-control" />
+                    <ValidationMessage For="() => Internacao.DataEntrada" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="datasaida" class="form-label">DataSaida:</label>
+                    <InputDate id="datasaida" @bind-Value="Internacao.DataSaida" class="form-control" />
+                    <ValidationMessage For="() => Internacao.DataSaida" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="idresponsavel" class="form-label">IdResponsavel:</label>
+                    <InputNumber id="idresponsavel" @bind-Value="Internacao.IdResponsavel" class="form-control" />
+                    <ValidationMessage For="() => Internacao.IdResponsavel" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="tratamento" class="form-label">Tratamento:</label>
+                    <InputText id="tratamento" @bind-Value="Internacao.Tratamento" class="form-control" />
+                    <ValidationMessage For="() => Internacao.Tratamento" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/internacaos">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdInternacao { get; set; }
+
+    [SupplyParameterFromForm]
+    private Internacao? Internacao { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        // Internacao ??= await context.Internacao.FirstOrDefaultAsync(m => m.IdInternacao == IdInternacao);
+
+        if (Internacao is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateInternacao()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //context.Attach(Internacao!).State = EntityState.Modified;
+        /*
+        try
+    {
+    await context.SaveChangesAsync();
+    }
+    catch (DbUpdateConcurrencyException)
+        {
+        if (!InternacaoExists(Internacao!.IdInternacao))
+            {
+            NavigationManager.NavigateTo("notfound");
+        }
+        else
+        {
+        throw;
+    }
+    }
+        */
+        NavigationManager.NavigateTo("/internacaos");
+    }
+
+    private bool InternacaoExists(int idinternacao)
+    {
+        //using var context = DbFactory.CreateDbContext();
+        return false; // context.Internacao.Any(e => e.IdInternacao == idinternacao);
+    }
+}

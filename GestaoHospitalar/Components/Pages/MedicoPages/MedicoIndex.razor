@@ -1,0 +1,95 @@
+﻿@page "/medicos"
+@inject IMedicoService MedicoService
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+
+<PageTitle>Médicos</PageTitle>
+
+<h1>Médicos</h1>
+
+
+<MudPaper Class="pa-4">
+    <MudStack Spacing="3">
+        <MudText Typo="Typo.h4">Gestão de Médicos</MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="NavigateToCreate">
+            Cadastrar Novo Médico
+        </MudButton>
+
+        <MudTable Items="medicos" Hover="true" Bordered="true" Striped="true" Loading="@isLoading">
+            <HeaderContent>
+                <MudTh>Id</MudTh>
+                <MudTh>CRM</MudTh>
+                <MudTh>Nome</MudTh>
+                <MudTh>Telefone</MudTh>
+                <MudTh>Email</MudTh>
+                <MudTh>Ações</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Id">@context.IdFuncionario</MudTd>
+                <MudTd DataLabel="CRM">@context.Crm</MudTd>
+                <MudTd DataLabel="Nome">@context.Nome</MudTd>
+                <MudTd DataLabel="Telefone">@context.Telefone</MudTd>
+                <MudTd DataLabel="Email">@context.Email</MudTd>
+                <MudTd DataLabel="Ações">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="() => NavigateToEdit(context.IdFuncionario)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Info" Color="Color.Secondary" OnClick="() => NavigateToDetails(context.IdFuncionario)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => NavigateToDelete(context.IdFuncionario)" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudStack>
+</MudPaper>
+
+
+@code {
+    private IEnumerable<Medico> medicos = default!;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadMedicos();
+    }
+
+    private async Task LoadMedicos()
+    {
+        try
+        {
+            isLoading = true;
+            medicos = await MedicoService.GetMedicosAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erro ao carregar médicos: {ex.Message}");
+            Snackbar.Add("Erro ao carregar médicos.", Severity.Error);
+            medicos = Enumerable.Empty<Medico>();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void NavigateToCreate()
+    {
+        NavigationManager.NavigateTo("/medicos/create");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"/medicos/edit?idfuncionario={id}");
+    }
+
+    private void NavigateToDetails(int id)
+    {
+        NavigationManager.NavigateTo($"/medicos/details?idfuncionario={id}");
+    }
+
+    private void NavigateToDelete(int id)
+    {
+        NavigationManager.NavigateTo($"/medicos/delete?idfuncionario={id}");
+    }
+
+}

@@ -1,0 +1,56 @@
+﻿@page "/medicos/delete"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Delete</PageTitle>
+
+<h1>Delete</h1>
+
+<p>Are you sure you want to delete this?</p>
+<div>
+    <h2>Medico</h2>
+    <hr />
+    @if (medico is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Crm</dt>
+            <dd class="col-sm-10">@medico.Crm</dd>
+        </dl>
+        <dl class="row">
+            <dt class="col-sm-2">Especialidade</dt>
+            <dd class="col-sm-10">@medico.Especialidade</dd>
+        </dl>
+        <EditForm method="post" Model="medico" OnValidSubmit="DeleteMedico" FormName="delete" Enhance>
+            <button type="submit" class="btn btn-danger" disabled="@(medico is null)">Delete</button> |
+            <a href="/medicos">Back to List</a>
+        </EditForm>
+    }
+</div>
+
+@code {
+    private Medico? medico;
+
+    [SupplyParameterFromQuery]
+    private int IdFuncionario { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //medico = await context.Medico.FirstOrDefaultAsync(m => m.IdFuncionario == IdFuncionario);
+
+        if (medico is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    private async Task DeleteMedico()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //context.Medico.Remove(medico!);
+        //await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/medicos");
+    }
+}

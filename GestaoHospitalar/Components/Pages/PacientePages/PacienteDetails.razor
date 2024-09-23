@@ -1,0 +1,59 @@
+﻿@page "/pacientes/details"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Paciente</h2>
+    <hr />
+    @if (paciente is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Nome</dt>
+            <dd class="col-sm-10">@paciente.Nome</dd>
+            <dt class="col-sm-2">DataNascimento</dt>
+            <dd class="col-sm-10">@paciente.DataNascimento</dd>
+            <dt class="col-sm-2">Endereco</dt>
+            <dd class="col-sm-10">@paciente.Endereco</dd>
+            <dt class="col-sm-2">Telefone</dt>
+            <dd class="col-sm-10">@paciente.Telefone</dd>
+            <dt class="col-sm-2">Email</dt>
+            <dd class="col-sm-10">@paciente.Email</dd>
+            <dt class="col-sm-2">TipoSanguineo</dt>
+            <dd class="col-sm-10">@paciente.TipoSanguineo</dd>
+            <dt class="col-sm-2">ContatoEmergenciaNome</dt>
+            <dd class="col-sm-10">@paciente.ContatoEmergenciaNome</dd>
+            <dt class="col-sm-2">ContatoEmergenciaTelefone</dt>
+            <dd class="col-sm-10">@paciente.ContatoEmergenciaTelefone</dd>
+            <dt class="col-sm-2">ContatoEmergenciaRelacao</dt>
+            <dd class="col-sm-10">@paciente.ContatoEmergenciaRelacao</dd>
+        </dl>
+        <div>
+            <a href="@($"/pacientes/edit?cpf={paciente.Cpf}")">Edit</a> |
+            <a href="@($"/pacientes")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Paciente? paciente;
+
+    [SupplyParameterFromQuery]
+    private string Cpf { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //paciente = await context.Paciente.FirstOrDefaultAsync(m => m.Cpf == Cpf);
+
+        if (paciente is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}

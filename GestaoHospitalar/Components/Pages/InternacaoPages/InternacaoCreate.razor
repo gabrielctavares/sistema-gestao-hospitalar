@@ -1,0 +1,66 @@
+﻿@page "/internacoes/create"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Create</PageTitle>
+
+<h1>Create</h1>
+
+<h2>Internacao</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <EditForm method="post" Model="Internacao" OnValidSubmit="AddInternacao" FormName="create" Enhance>
+            <DataAnnotationsValidator />
+            <ValidationSummary class="text-danger" />
+            <div class="mb-3">
+                <label for="idpaciente" class="form-label">IdPaciente:</label> 
+                <InputText id="idpaciente" @bind-Value="Internacao.IdPaciente" class="form-control" /> 
+                <ValidationMessage For="() => Internacao.IdPaciente" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="idquarto" class="form-label">IdQuarto:</label> 
+                <InputNumber id="idquarto" @bind-Value="Internacao.IdQuarto" class="form-control" /> 
+                <ValidationMessage For="() => Internacao.IdQuarto" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="dataentrada" class="form-label">DataEntrada:</label> 
+                <InputDate id="dataentrada" @bind-Value="Internacao.DataEntrada" class="form-control" /> 
+                <ValidationMessage For="() => Internacao.DataEntrada" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="datasaida" class="form-label">DataSaida:</label> 
+                <InputDate id="datasaida" @bind-Value="Internacao.DataSaida" class="form-control" /> 
+                <ValidationMessage For="() => Internacao.DataSaida" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="idresponsavel" class="form-label">IdResponsavel:</label> 
+                <InputNumber id="idresponsavel" @bind-Value="Internacao.IdResponsavel" class="form-control" /> 
+                <ValidationMessage For="() => Internacao.IdResponsavel" class="text-danger" /> 
+            </div>        
+            <div class="mb-3">
+                <label for="tratamento" class="form-label">Tratamento:</label> 
+                <InputText id="tratamento" @bind-Value="Internacao.Tratamento" class="form-control" /> 
+                <ValidationMessage For="() => Internacao.Tratamento" class="text-danger" /> 
+            </div>        
+            <button type="submit" class="btn btn-primary">Create</button>
+        </EditForm>
+    </div>
+</div>
+
+<div>
+    <a href="/internacaos">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromForm]
+    private Internacao Internacao { get; set; } = new();
+
+    // To protect from overposting attacks, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task AddInternacao()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //context.Internacao.Add(Internacao);
+        //await context.SaveChangesAsync();
+        NavigationManager.NavigateTo("/internacaos");
+    }
+}

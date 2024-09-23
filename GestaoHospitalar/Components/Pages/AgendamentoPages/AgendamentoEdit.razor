@@ -1,0 +1,90 @@
+﻿@page "/agendamentos/edit"
+@inject NavigationManager NavigationManager
+@inject IMedicoService MedicoService
+@inject IAgendamentoService AgendamentoService
+@inject ISnackbar Snackbar
+
+<PageTitle>Editar Agendamento</PageTitle>
+
+<h1>Editar Agendamento</h1>
+
+<hr />
+@if (Agendamento is null || medicos is null)
+{
+    <p><em>Carregando...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Agendamento" OnValidSubmit="UpdateAgendamento" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />                
+                <div class="mb-3">
+                    <label for="idsecretario" class="form-label">IdSecretario:</label>
+                    <InputNumber id="idsecretario" @bind-Value="Agendamento.IdSecretario" class="form-control" />
+                    <ValidationMessage For="() => Agendamento.IdSecretario" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="Medico" class="form-label">Médico</label>
+                    <InputSelect id="Medico" class="form-control" @bind-Value="Agendamento.IdMedico">
+                        <option value="0">-- Selecione --</option>
+                        @foreach (var medico in medicos!)
+                        {
+                            <option value="@medico.IdFuncionario">@medico.Nome (@medico.Especialidade)</option>
+                        }
+                    </InputSelect>
+                    <ValidationMessage For="@(() => Agendamento.IdMedico)" />
+                </div>
+                <div class="mb-3">
+                    <label for="dataagendamento" class="form-label">DataAgendamento:</label>
+                    <InputDate id="dataagendamento" @bind-Value="Agendamento.DataAgendamento" class="form-control" />
+                    <ValidationMessage For="() => Agendamento.DataAgendamento" class="text-danger" />
+                </div>
+
+                <div class="mb-3">
+                    <label for="Status">Status</label>
+                    <InputSelect id="Status" class="form-control" @bind-Value="Agendamento.Status">
+                        <option value="pendente">Pendente</option>
+                        <option value="confirmado">Confirmado</option>
+                    </InputSelect>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/agendamentos">Voltar a listagem</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdAgendamento { get; set; }
+
+    [SupplyParameterFromForm]
+    private Agendamento? Agendamento { get; set; }
+
+
+    private IEnumerable<Medico>? medicos;
+
+    protected override async Task OnInitializedAsync()
+    {
+        medicos = await MedicoService.GetMedicosAsync();
+        Agendamento = await AgendamentoService.GetAgendamentoByIdAsync(IdAgendamento);
+        if (Agendamento is null)
+        {
+            Snackbar.Add("Agendamento não encontrado.", Severity.Error);
+            NavigationManager.NavigateTo("/notfound");
+        }
+    }
+
+    private async Task UpdateAgendamento()
+    {
+        await AgendamentoService.UpdateAgendamentoAsync(Agendamento!);
+        NavigationManager.NavigateTo("/agendamentos");
+    }
+}

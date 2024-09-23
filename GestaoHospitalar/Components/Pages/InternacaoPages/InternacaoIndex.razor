@@ -1,0 +1,96 @@
+﻿@page "/internacoes"
+@inject IInternacaoService InternacaoService
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+
+<PageTitle>Internações</PageTitle>
+
+<h1>Internações</h1>
+
+<MudPaper Class="pa-4">
+    <MudStack Spacing="3">
+        <MudText Typo="Typo.h4">Gestão de Internações</MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="NavigateToCreate">
+            Cadastrar Nova Internação
+        </MudButton>
+
+        <MudTable Items="internacoes" Hover="true" Bordered="true" Striped="true" Loading="@isLoading">
+            <HeaderContent>
+                <MudTh>Id</MudTh>
+                <MudTh>Paciente</MudTh>
+                <MudTh>Quarto</MudTh>
+                <MudTh>Entrada</MudTh>
+                <MudTh>Saída</MudTh>
+                <MudTh>Responsável</MudTh>
+                <MudTh>Tratamento</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Id">@context.IdInternacao</MudTd>
+                <MudTd DataLabel="Paciente">(@context.IdPaciente) - @context.NomePaciente</MudTd>
+                <MudTd DataLabel="Quarto">@context.IdQuarto</MudTd>
+                <MudTd DataLabel="Entrada">@context.DataEntrada.ToString("dd/MM/yyyy hh:mm")</MudTd>
+                <MudTd DataLabel="Saída">@context.DataSaida?.ToString("dd/MM/yyyy hh:mm")</MudTd>
+                <MudTd DataLabel="Responsável">(@context.IdResponsavel) - @context.NomeResponsavel</MudTd>
+                <MudTd DataLabel="Tratamento">@context.Tratamento</MudTd>
+                <MudTd DataLabel="Ações">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="() => NavigateToEdit(context.IdInternacao)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Info" Color="Color.Secondary" OnClick="() => NavigateToDetails(context.IdInternacao)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => NavigateToDelete(context.IdInternacao)" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudStack>
+</MudPaper>
+
+@code {
+    private IEnumerable<Internacao> internacoes = default!;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadInternacoes();
+    }
+
+    private async Task LoadInternacoes()
+    {
+        try
+        {
+            isLoading = true;
+            internacoes = await InternacaoService.GetInternacoesAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erro ao carregar Internações: {ex.Message}");
+            Snackbar.Add("Erro ao carregar Internações.", Severity.Error);
+            internacoes = Enumerable.Empty<Internacao>();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private void NavigateToCreate()
+    {
+        NavigationManager.NavigateTo("/internacoes/create");
+    }
+
+    private void NavigateToEdit(int id)
+    {
+        NavigationManager.NavigateTo($"/internacoes/edit?IdInternacao={id}");
+    }
+
+    private void NavigateToDetails(int id)
+    {
+        NavigationManager.NavigateTo($"/internacoes/details?IdInternacao={id}");
+    }
+
+    private void NavigateToDelete(int id)
+    {
+        NavigationManager.NavigateTo($"/internacoes/delete?IdInternacao={id}");
+    }
+
+}

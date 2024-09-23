@@ -1,7 +1,11 @@
 using GestaoHospitalar.Components;
+using GestaoHospitalar.Services;
+using MudBlazor.Services;
 using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
+
+Dapper.DefaultTypeMap.MatchNamesWithUnderscores = true;
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
@@ -15,14 +19,20 @@ if (string.IsNullOrEmpty(dbUser) || string.IsNullOrEmpty(dbPassword))
 
 var fullConnectionString = $"{connectionString}User ID={dbUser};Password={dbPassword};";
 
-
 builder.Services.AddTransient(x =>
   new MySqlConnection(fullConnectionString));
 
+builder.Services.AddScoped<IPacienteService, PacienteService>();
+builder.Services.AddScoped<IMedicoService, MedicoService>();
+builder.Services.AddScoped<IAgendamentoService, AgendamentoService>();
+builder.Services.AddScoped<IInternacaoService, InternacaoService>();
+builder.Services.AddScoped<IEstoqueMedicamentoService, EstoqueMedicamentoService>();
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
@@ -38,6 +48,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 app.UseAntiforgery();
+
 
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();

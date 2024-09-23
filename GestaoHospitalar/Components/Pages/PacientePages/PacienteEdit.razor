@@ -1,0 +1,127 @@
+﻿@page "/pacientes/edit"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Paciente</h2>
+<hr />
+@if (Paciente is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Paciente" OnValidSubmit="UpdatePaciente" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="Paciente.Cpf" value="@Paciente.Cpf" />
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome:</label>
+                    <InputText id="nome" @bind-Value="Paciente.Nome" class="form-control" />
+                    <ValidationMessage For="() => Paciente.Nome" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="datanascimento" class="form-label">DataNascimento:</label>
+                    <InputDate id="datanascimento" @bind-Value="Paciente.DataNascimento" class="form-control" />
+                    <ValidationMessage For="() => Paciente.DataNascimento" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="endereco" class="form-label">Endereco:</label>
+                    <InputText id="endereco" @bind-Value="Paciente.Endereco" class="form-control" />
+                    <ValidationMessage For="() => Paciente.Endereco" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="telefone" class="form-label">Telefone:</label>
+                    <InputText id="telefone" @bind-Value="Paciente.Telefone" class="form-control" />
+                    <ValidationMessage For="() => Paciente.Telefone" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <InputText id="email" @bind-Value="Paciente.Email" class="form-control" />
+                    <ValidationMessage For="() => Paciente.Email" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="tiposanguineo" class="form-label">TipoSanguineo:</label>
+                    <InputText id="tiposanguineo" @bind-Value="Paciente.TipoSanguineo" class="form-control" />
+                    <ValidationMessage For="() => Paciente.TipoSanguineo" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="contatoemergencianome" class="form-label">ContatoEmergenciaNome:</label>
+                    <InputText id="contatoemergencianome" @bind-Value="Paciente.ContatoEmergenciaNome" class="form-control" />
+                    <ValidationMessage For="() => Paciente.ContatoEmergenciaNome" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="contatoemergenciatelefone" class="form-label">ContatoEmergenciaTelefone:</label>
+                    <InputText id="contatoemergenciatelefone" @bind-Value="Paciente.ContatoEmergenciaTelefone" class="form-control" />
+                    <ValidationMessage For="() => Paciente.ContatoEmergenciaTelefone" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="contatoemergenciarelacao" class="form-label">ContatoEmergenciaRelacao:</label>
+                    <InputText id="contatoemergenciarelacao" @bind-Value="Paciente.ContatoEmergenciaRelacao" class="form-control" />
+                    <ValidationMessage For="() => Paciente.ContatoEmergenciaRelacao" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/pacientes">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private string Cpf { get; set; }
+
+    [SupplyParameterFromForm]
+    private Paciente? Paciente { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //Paciente ??= await context.Paciente.FirstOrDefaultAsync(m => m.Cpf == Cpf);
+
+        if (Paciente is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdatePaciente()
+    {
+        /*
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Paciente!).State = EntityState.Modified;
+
+        try
+        {
+            await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+        {
+            if (!PacienteExists(Paciente!.Cpf))
+            {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+            {
+                throw;
+            }
+        }
+        */
+        NavigationManager.NavigateTo("/pacientes");
+    }
+
+    private bool PacienteExists(string cpf)
+    {
+        //using var context = DbFactory.CreateDbContext();
+        return false; //context.Paciente.Any(e => e.Cpf == cpf);
+    }
+}

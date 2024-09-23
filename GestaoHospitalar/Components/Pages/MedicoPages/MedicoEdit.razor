@@ -1,0 +1,92 @@
+﻿@page "/medicos/edit"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Edit</PageTitle>
+
+<h1>Edit</h1>
+
+<h2>Medico</h2>
+<hr />
+@if (Medico is null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="row">
+        <div class="col-md-4">
+            <EditForm method="post" Model="Medico" OnValidSubmit="UpdateMedico" FormName="edit" Enhance>
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <input type="hidden" name="Medico.IdFuncionario" value="@Medico.IdFuncionario" />
+                <div class="mb-3">
+                    <label for="crm" class="form-label">Crm:</label>
+                    <InputText id="crm" @bind-Value="Medico.Crm" class="form-control" />
+                    <ValidationMessage For="() => Medico.Crm" class="text-danger" />
+                </div>
+                <div class="mb-3">
+                    <label for="especialidade" class="form-label">Especialidade:</label>
+                    <InputText id="especialidade" @bind-Value="Medico.Especialidade" class="form-control" />
+                    <ValidationMessage For="() => Medico.Especialidade" class="text-danger" />
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </EditForm>
+        </div>
+    </div>
+}
+
+<div>
+    <a href="/medicos">Back to List</a>
+</div>
+
+@code {
+    [SupplyParameterFromQuery]
+    private int IdFuncionario { get; set; }
+
+    [SupplyParameterFromForm]
+    private Medico? Medico { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //Medico ??= await context.Medico.FirstOrDefaultAsync(m => m.IdFuncionario == IdFuncionario);
+
+        if (Medico is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more information, see https://learn.microsoft.com/aspnet/core/blazor/forms/#mitigate-overposting-attacks.
+    private async Task UpdateMedico()
+    {
+        /*
+        using var context = DbFactory.CreateDbContext();
+        context.Attach(Medico!).State = EntityState.Modified;
+
+            try
+        {
+        await context.SaveChangesAsync();
+        }
+        catch (DbUpdateConcurrencyException)
+            {
+            if (!MedicoExists(Medico!.IdFuncionario))
+                {
+                NavigationManager.NavigateTo("notfound");
+            }
+            else
+                {
+            throw;
+        }
+        }
+        */
+        NavigationManager.NavigateTo("/medicos");
+    }
+
+    private bool MedicoExists(int idfuncionario)
+    {
+        //using var context = DbFactory.CreateDbContext();
+        return false; // context.Medico.Any(e => e.IdFuncionario == idfuncionario);
+    }
+}

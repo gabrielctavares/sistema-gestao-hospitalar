@@ -1,0 +1,101 @@
+﻿@page "/pacientes"
+@using GestaoHospitalar.Models
+@inject IPacienteService PacienteService
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+
+<PageTitle>Pacientes</PageTitle>
+
+<h1>Pacientes</h1>
+
+<MudPaper Class="pa-4">
+    <MudStack Spacing="3">
+        <MudText Typo="Typo.h4">Gestão de Pacientes</MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="NavigateToCreate">
+            Cadastrar Novo Paciente
+        </MudButton>
+
+        <MudTable Items="Pacientes" Hover="true" Bordered="true" Striped="true">
+            <HeaderContent>
+                <MudTh>CPF</MudTh>
+                <MudTh>Nome</MudTh>
+                <MudTh>Telefone</MudTh>
+                <MudTh>Endereco</MudTh>
+                <MudTh>Data de Nascimento</MudTh>
+                <MudTh>Tipo Sanguíneo</MudTh>
+                <MudTh>Nome do Contato de Emergência</MudTh>
+                <MudTh>Telefone do Contato de Emergência</MudTh>
+                <MudTh>Relação do Contato de Emergência</MudTh>
+                <MudTh>Ações</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="CPF">@context.Cpf</MudTd>
+                <MudTd DataLabel="Nome">@context.Nome</MudTd>
+                <MudTd DataLabel="Telefone">@context.Telefone</MudTd>
+                <MudTd DataLabel="Endereco">@context.Endereco</MudTd>
+                <MudTd DataLabel="Data de Nascimento">@context.DataNascimento?.ToString("dd/MM/yyyy hh:mm")</MudTd>
+                <MudTd DataLabel="Tipo Sanguíneo">@context.TipoSanguineo</MudTd>
+                <MudTd DataLabel="Nome do Contato de Emergência">@context.ContatoEmergenciaNome</MudTd>
+                <MudTd DataLabel="Telefone do Contato de Emergência">@context.ContatoEmergenciaTelefone</MudTd>
+                <MudTd DataLabel="Relação do Contato de Emergência">@context.ContatoEmergenciaRelacao</MudTd>
+                <MudTd DataLabel="Ações">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="() => NavigateToEdit(context.Cpf)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Info" Color="Color.Secondary" OnClick="() => NavigateToDetails(context.Cpf)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => NavigateToDetails(context.Cpf)" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudStack>
+</MudPaper>
+
+@code {
+    private IEnumerable<Paciente>? Pacientes;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAgendamentos();
+    }
+
+    private async Task LoadAgendamentos()
+    {
+        try
+        {
+            isLoading = true;
+            Pacientes = await PacienteService.GetPacientesAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erro ao carregar Pacientes: {ex.Message}");
+            Snackbar.Add("Erro ao carregar Pacientes.", Severity.Error);
+            Pacientes = Enumerable.Empty<Paciente>();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+
+    }
+
+    private void NavigateToCreate()
+    {
+        NavigationManager.NavigateTo("/pacientes/create");
+    }
+
+    private void NavigateToEdit(string cpf)
+    {
+        NavigationManager.NavigateTo($"/pacientes/edit?CPF={cpf}");
+    }
+
+    private void NavigateToDetails(string cpf)
+    {
+        NavigationManager.NavigateTo($"/pacientes/details?CPF={cpf}");
+    }
+    private void NavigateToDelete(string cpf)
+    {
+        NavigationManager.NavigateTo($"/pacientes/cancel?CPF={cpf}");
+    }
+}

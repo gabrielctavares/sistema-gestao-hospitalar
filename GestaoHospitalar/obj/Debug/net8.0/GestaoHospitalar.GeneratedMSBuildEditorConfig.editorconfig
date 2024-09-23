@@ -1,11 +1,22 @@
 is_global = true
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudIllegalParameters = 
+build_property.TargetFramework = net8.0
 build_property.TargetFramework = net8.0
 build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
 build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
 build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = GestaoHospitalar
 build_property.RootNamespace = GestaoHospitalar
@@ -22,20 +33,100 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/AgendamentoPages/AgendamentoCancel.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ2VuZGFtZW50b1BhZ2VzXEFnZW5kYW1lbnRvQ2FuY2VsLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/AgendamentoPages/AgendamentoCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ2VuZGFtZW50b1BhZ2VzXEFnZW5kYW1lbnRvQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/AgendamentoPages/AgendamentoDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ2VuZGFtZW50b1BhZ2VzXEFnZW5kYW1lbnRvRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/AgendamentoPages/AgendamentoEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ2VuZGFtZW50b1BhZ2VzXEFnZW5kYW1lbnRvRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/AgendamentoPages/AgendamentoIndex.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZ2VuZGFtZW50b1BhZ2VzXEFnZW5kYW1lbnRvSW5kZXgucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/Error.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFcnJvci5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/EstoqueAbaixoMinimoIndex.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xFc3RvcXVlQWJhaXhvTWluaW1vSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
-[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/InternacaoPages/InternacaoCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnRlcm5hY2FvUGFnZXNcSW50ZXJuYWNhb0NyZWF0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/InternacaoPages/InternacaoDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnRlcm5hY2FvUGFnZXNcSW50ZXJuYWNhb0RlbGV0ZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/InternacaoPages/InternacaoDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnRlcm5hY2FvUGFnZXNcSW50ZXJuYWNhb0RldGFpbHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/InternacaoPages/InternacaoEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnRlcm5hY2FvUGFnZXNcSW50ZXJuYWNhb0VkaXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/InternacaoPages/InternacaoIndex.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xJbnRlcm5hY2FvUGFnZXNcSW50ZXJuYWNhb0luZGV4LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/MedicoPages/MedicoCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWRpY29QYWdlc1xNZWRpY29DcmVhdGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/MedicoPages/MedicoDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWRpY29QYWdlc1xNZWRpY29EZWxldGUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/MedicoPages/MedicoDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWRpY29QYWdlc1xNZWRpY29EZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/MedicoPages/MedicoEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWRpY29QYWdlc1xNZWRpY29FZGl0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/MedicoPages/MedicoIndex.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xNZWRpY29QYWdlc1xNZWRpY29JbmRleC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientePages/PacienteCreate.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZVBhZ2VzXFBhY2llbnRlQ3JlYXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientePages/PacienteDelete.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZVBhZ2VzXFBhY2llbnRlRGVsZXRlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientePages/PacienteDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZVBhZ2VzXFBhY2llbnRlRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientePages/PacienteEdit.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZVBhZ2VzXFBhY2llbnRlRWRpdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientePages/PacienteIndex.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZVBhZ2VzXFBhY2llbnRlSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Pages/PacientesAtendimento.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xQYWNpZW50ZXNBdGVuZGltZW50by5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [G:/Projetos/GestaoHospitalar/GestaoHospitalar/Components/Routes.razor]

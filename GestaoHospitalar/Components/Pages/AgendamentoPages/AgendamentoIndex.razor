@@ -1,0 +1,91 @@
+﻿@page "/agendamentos"
+@inject IAgendamentoService AgendamentoService
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+<PageTitle>Agendamentos</PageTitle>
+
+
+<MudPaper Class="pa-4">
+    <MudStack Spacing="3">
+        <MudText Typo="Typo.h4">Agendamentos</MudText>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" OnClick="NavigateToCreate">
+            Criar Novo Agendamento
+        </MudButton>
+
+        <MudTable Items="agendamentos" Hover="true" Bordered="true" Striped="true" Loading="@isLoading">
+            <HeaderContent>
+                <MudTh>ID</MudTh>
+                <MudTh>Paciente</MudTh>
+                <MudTh>Secretário</MudTh>
+                <MudTh>Médico</MudTh>
+                <MudTh>Data e Hora</MudTh>
+                <MudTh>Status</MudTh>
+                <MudTh>Ações</MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="ID">@context.IdAgendamento</MudTd>
+                <MudTd DataLabel="Paciente">(@context.IdPaciente) - @context.NomePaciente</MudTd>
+                <MudTd DataLabel="Secretário">(@context.IdSecretario) - @context.NomeSecretario</MudTd>
+                <MudTd DataLabel="Médico">(@context.IdMedico) - @context.NomeMedico</MudTd>
+                <MudTd DataLabel="Data e Hora">@context.DataAgendamento?.ToString("dd/MM/yyyy HH:mm")</MudTd>
+                <MudTd DataLabel="Status">@context.Status</MudTd>
+                <MudTd DataLabel="Ações">
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" Color="Color.Primary" OnClick="() => NavigateToEdit(context.IdAgendamento)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Info" Color="Color.Secondary" OnClick="() => NavigateToDetails(context.IdAgendamento)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Color="Color.Error" OnClick="() => NavigateToDelete(context.IdAgendamento)" />
+                </MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudStack>
+</MudPaper>
+@code {
+    private IEnumerable<Agendamento>? agendamentos;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadAgendamentos();
+    }
+
+    private async Task LoadAgendamentos()
+    {
+        try
+        {
+            isLoading = true;
+            agendamentos = await AgendamentoService.GetAgendamentosAsync();
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Erro ao carregar Agendamentos: {ex.Message}");
+            Snackbar.Add("Erro ao carregar Agendamentos.", Severity.Error);
+            agendamentos = Enumerable.Empty<Agendamento>();
+        }
+        finally
+        {
+            isLoading = false;
+        }
+
+    }
+
+    private void NavigateToCreate()
+    {
+        NavigationManager.NavigateTo("/agendamentos/create");
+    }
+
+    private void NavigateToEdit(int idAgendamento)
+    {
+        NavigationManager.NavigateTo($"/agendamentos/edit?idagendamento={idAgendamento}");
+    }
+
+    private void NavigateToDetails(int idAgendamento)
+    {
+        NavigationManager.NavigateTo($"/agendamentos/details?idagendamento={idAgendamento}");
+    }
+    private void NavigateToDelete(int idAgendamento)
+    {
+        NavigationManager.NavigateTo($"/agendamentos/cancel?idagendamento={idAgendamento}");
+    }
+}

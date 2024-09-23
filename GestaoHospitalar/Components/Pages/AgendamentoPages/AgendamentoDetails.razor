@@ -1,0 +1,66 @@
+﻿@page "/agendamentos/details"
+
+@inject IAgendamentoService AgendamentoService
+@inject NavigationManager NavigationManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Detalhes do Agendamento</PageTitle>
+
+<MudPaper Class="pa-4">
+    <MudStack Spacing="3">
+        <MudText Typo="Typo.h4">Detalhes do Agendamento</MudText>
+
+        @if (agendamento is null)
+        {
+            <MudText>Carregando...</MudText>
+        }
+        else
+        {
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">ID: @agendamento.IdAgendamento</MudText>
+                    <MudText>Paciente: @agendamento.NomePaciente (@agendamento.IdPaciente)</MudText>
+                    <MudText>Secretário: @agendamento.NomeSecretario (@agendamento.IdSecretario)</MudText>
+                    <MudText>Médico: @agendamento.NomeMedico (@agendamento.IdMedico)</MudText>
+                    <MudText>Data e Hora: @agendamento.DataAgendamento?.ToString("dd/MM/yyyy HH:mm")</MudText>
+                    <MudText>Status: @agendamento.Status</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="() => NavigateToEdit(agendamento.IdAgendamento)">
+                        Editar
+                    </MudButton>
+                    <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="() => NavigateToList()">
+                        Voltar
+                    </MudButton>
+                </MudCardActions>
+            </MudCard>
+        }
+    </MudStack>
+</MudPaper>
+
+@code {
+    private Agendamento? agendamento;
+
+    [SupplyParameterFromQuery]
+    private int IdAgendamento { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        agendamento = await AgendamentoService.GetAgendamentoByIdAsync(IdAgendamento);
+        if (agendamento is null)
+        {
+            Snackbar.Add("Agendamento não encontrado.", Severity.Error);
+            NavigationManager.NavigateTo("/notfound");
+        }
+    }
+
+    private void NavigateToEdit(int idAgendamento)
+    {
+        NavigationManager.NavigateTo($"/agendamentos/edit?idagendamento={idAgendamento}");
+    }
+
+    private void NavigateToList()
+    {
+        NavigationManager.NavigateTo("/agendamentos");
+    }
+}

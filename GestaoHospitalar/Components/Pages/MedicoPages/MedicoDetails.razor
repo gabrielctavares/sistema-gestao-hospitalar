@@ -1,0 +1,45 @@
+﻿@page "/medicos/details"
+@inject NavigationManager NavigationManager
+
+<PageTitle>Details</PageTitle>
+
+<h1>Details</h1>
+
+<div>
+    <h2>Medico</h2>
+    <hr />
+    @if (medico is null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else {
+        <dl class="row">
+            <dt class="col-sm-2">Crm</dt>
+            <dd class="col-sm-10">@medico.Crm</dd>
+            <dt class="col-sm-2">Especialidade</dt>
+            <dd class="col-sm-10">@medico.Especialidade</dd>
+        </dl>
+        <div>
+            <a href="@($"/medicos/edit?idfuncionario={medico.IdFuncionario}")">Edit</a> |
+            <a href="@($"/medicos")">Back to List</a>
+        </div>
+    }
+</div>
+
+@code {
+    private Medico? medico;
+
+    [SupplyParameterFromQuery]
+    private int IdFuncionario { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        //using var context = DbFactory.CreateDbContext();
+        //medico = await context.Medico.FirstOrDefaultAsync(m => m.IdFuncionario == IdFuncionario);
+
+        if (medico is null)
+        {
+            NavigationManager.NavigateTo("notfound");
+        }
+    }
+}
